@@ -34,6 +34,30 @@ const FeaturedRow = ({ id, title, description }) => {
                 long={230}
                 lat={450}
             />
+            <RestaurantCard
+                id={123}
+                imgUrl="http://links.papareact.com/gn7"
+                title="Gozen Sushi"
+                rating={4.5}
+                genre="Japanese"
+                address="675 Hyde Park Rd"
+                short_description="Tasty Sushi with a Twist!"
+                dishes={[]}
+                long={230}
+                lat={450}
+            />
+            <RestaurantCard
+                id={123}
+                imgUrl="http://links.papareact.com/gn7"
+                title="Gozen Sushi"
+                rating={4.5}
+                genre="Japanese"
+                address="675 Hyde Park Rd"
+                short_description="Tasty Sushi with a Twist!"
+                dishes={[]}
+                long={230}
+                lat={450}
+            />
         </ScrollView>
     </View>
   )
