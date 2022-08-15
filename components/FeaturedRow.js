@@ -1,9 +1,33 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
+import sanityClient from '../sanity'
 
 const FeaturedRow = ({ id, title, description }) => {
+const [restaurants, setRestaurants] = useState([]);
+
+    useEffect(() => {
+        sanityClient.fetch(`
+            *[_type == "featured" && _id == $id] {
+                ...,
+                restaurants[]->{
+                    ...,
+                    dishes[]->,
+                    type-> {
+                        name
+                    }
+                },
+            }[0]
+        `, 
+        { id }
+        ).then(data => {
+            setRestaurants(data?.restaurants);
+        });
+    }, []);
+
+    console.log(restaurants); 
+
   return (
     <View>
         <View className="mt-4 flex-row items-center justify-between px-4">
@@ -21,43 +45,23 @@ const FeaturedRow = ({ id, title, description }) => {
             showsHorizontalScrollIndicator={false}
             className="pt-4"
         >
-            {/* RestaurantCards... */}
-            <RestaurantCard
-                id={123}
-                imgUrl="http://links.papareact.com/gn7"
-                title="Gozen Sushi"
-                rating={4.5}
-                genre="Japanese"
-                address="675 Hyde Park Rd"
-                short_description="Tasty Sushi with a Twist!"
-                dishes={[]}
-                long={230}
-                lat={450}
+            {restaurants?.map(restaurant => (
+                <RestaurantCard
+                key={restaurant._id}
+                id={restaurant._id}
+                imgUrl={restaurant.image.asset._ref}
+                title={restaurant.name}
+                short_description={restaurant.short_description}
+                address={restaurant.address}
+                rating={restaurant.rating}
+                dishes={restaurant.dishes}
+                genre={restaurant.type?.name}
+                long={restaurant.long}
+                lat={restaurant.lat}
             />
-            <RestaurantCard
-                id={123}
-                imgUrl="http://links.papareact.com/gn7"
-                title="Gozen Sushi"
-                rating={4.5}
-                genre="Japanese"
-                address="675 Hyde Park Rd"
-                short_description="Tasty Sushi with a Twist!"
-                dishes={[]}
-                long={230}
-                lat={450}
-            />
-            <RestaurantCard
-                id={123}
-                imgUrl="http://links.papareact.com/gn7"
-                title="Gozen Sushi"
-                rating={4.5}
-                genre="Japanese"
-                address="675 Hyde Park Rd"
-                short_description="Tasty Sushi with a Twist!"
-                dishes={[]}
-                long={230}
-                lat={450}
-            />
+            ))}
+
+            
         </ScrollView>
     </View>
   )
