@@ -1,6 +1,6 @@
 export default {
     name: 'featured',
-    title: 'Featured Menu Item',
+    title: 'Featured Menu catagories',
     type: 'document',
     fields: [
       {

@@ -84,23 +84,34 @@ const HomeScreen = () => {
                 <Categories/>
 
                 {/* featured  */}
-                <FeaturedRow 
+
+                {featuredCategories?.map(category => (
+                    <FeaturedRow 
+                        key={category._id}
+                        id={category._id}
+                        title={category.name}
+                        description={category.short_description}
+                    />
+                ))}
+
+
+                {/* <FeaturedRow 
                     id="123"
                     title="Featured"
                     description="Paid placements from our partners"
-                />
+                /> */}
                 {/* discounts  */}
-                <FeaturedRow 
+                {/* <FeaturedRow 
                     id="1234"
                     title="Tasty Discounts"
                     description="Take advantage of todays deals!"
-                />
+                /> */}
                 {/* offers  */}
-                <FeaturedRow 
+                {/* <FeaturedRow 
                     id="12345"
                     title="Offers near you!"
                     description="Support your local restaurant tonight!"
-                />
+                /> */}
 
 
 
