@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { urlFor } from '../sanity';
 import { 
@@ -11,10 +11,15 @@ import {
 import { QuestionMarkCircleIcon } from 'react-native-heroicons/outline';
 import DishRow from '../components/DishRow.js';
 import BasketIcon from '../components/BasketIcon.js';
+import { useDispatch } from "react-redux";
+import { setRestaurant } from '../features/restaurantSlice';
+
 
 
 const RestaurantScreen = () => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
     const {
         params: {
             id,
@@ -29,6 +34,23 @@ const RestaurantScreen = () => {
             lat,
         }, 
     } = useRoute();
+
+    useEffect(() => {
+        dispatch(
+            setRestaurant({
+                id,
+                imgUrl,
+                title,
+                rating,
+                genre,
+                address,
+                short_description,
+                dishes,
+                long,
+                lat,
+            })
+        );
+    }, [dispatch]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -82,7 +104,7 @@ const RestaurantScreen = () => {
                 </TouchableOpacity>
             </View>
 
-            <View>
+            <View className="pb-36">
                 <Text className="px-4 pt-6 mb-3 font-bold text-xl">Menu</Text>
 
                 {/* Dishrows */}

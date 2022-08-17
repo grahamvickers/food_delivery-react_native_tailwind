@@ -26,7 +26,7 @@ const [restaurants, setRestaurants] = useState([]);
         });
     }, []);
 
-    console.log(restaurants); 
+    // console.log(restaurants); 
 
   return (
     <View>
