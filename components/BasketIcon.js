@@ -8,9 +8,11 @@ import Currency from "react-currency-formatter";
 const BasketIcon = () => {
     const items = useSelector(selectBasketItems);
     const navigation = useNavigation();
-    const basketTotal = useSelector(selectBasketTotal)
+    const basketTotal = useSelector(selectBasketTotal);
 
+    // hide basket if no items are added yet
     if (items.length === 0) return null;
+
   return (
     <View className="absolute bottom-10 w-full z-50">
         <TouchableOpacity 
