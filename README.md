@@ -1,5 +1,3 @@
-# food_delivery-react_native_tailwind
-
 With this application I have created a Food Delivery App, where users can broswe local restaurants and their dishes. If you find an item you like add it to your basket and proceed to placing your order through the various steps. 
 
 
@@ -47,7 +45,7 @@ $ expo start
 
 ## Authors
 
-* **[Graham Vickers]**(https://github.com/grahamvickers)
+* [**Graham Vickers**](https://github.com/grahamvickers)
 
 
 
